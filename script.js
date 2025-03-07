@@ -1,8 +1,20 @@
 
 let nbAllumettes = 20
 let userNb
-let joueurs = ["Joueur 1","Joueur 2"]
+let joueurs = []
 let i = 0
+
+// fonction pour définir le nombre de joueurs
+function nbJoueurs(){
+
+    let nbJoueurs = prompt(`Combien il y a t'il de joueurs ?`)
+    joueurs.length = 0
+
+    for (let i = 1; i <= nbJoueurs; i++) {
+        joueurs.push(`Joueur ${i}`)
+    }
+
+}
 
 // fonction tour de jeu : tout ce qu'il se passe lorsque c'est le tour d'un joueur, jusqu'au résultat du nombre d'allumettes restantes
 function promptUser(joueur){
@@ -36,8 +48,10 @@ function promptUser(joueur){
 
 // fonction principale qui fait tourner tout le jeu
 function boucleJeu (){
-
+ 
     console.log("je suis dans boucleJeu")
+
+    nbJoueurs()
 
     // boucle de tour de jeu par joueur, ce qu'il se passe tant que le solde d'allumettes restantes est positif
     while(nbAllumettes > 0){
