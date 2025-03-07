@@ -6,6 +6,7 @@ Contraintes:
 Langage : JS ou Python.
 Suivez les étapes.
 Une fonctionnalité = une fonction.
+
 Étape 1
 Faire une fonction qui prend en paramètre le nombre d'allumettes à enlever du reste.
 
