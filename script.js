@@ -1,40 +1,25 @@
 
 let nbAllumettes = 20
 let userNb
-let joueur1 = "Joueur 1"
-let joueur2 = "Joueur 2"
+let joueurs = ["Joueur 1","Joueur 2"]
+let i = 0
 
-function boucleJeu (){
-
-    while(nbAllumettes > 0){
-
-        nbAllumettes = promptUser(joueur1)
-        console.log(nbAllumettes + "joueur1")
-    
-        nbAllumettes = promptUser(joueur2)
-        console.log(nbAllumettes + "joueur2")
-
-    }
-
-    alert(`Bravo ! Il ne reste plus d'allumettes, la partie est terminée.`)
-    
-}
-
-boucleJeu(nbAllumettes)
-
+// fonction tour de jeu : tout ce qu'il se passe lorsque c'est le tour d'un joueur, jusqu'au résultat du nombre d'allumettes restantes
 function promptUser(joueur){
 
+    // prompt pour récupérer le nombre d'allumettes à retirer
     userNb = prompt(`${joueur} : Il reste ${nbAllumettes} allumettes ! Combien d'allumettes veux-tu retirer cette fois-ci ?`, "Donne un chiffre entre 1 et 6")
 
+    // boucle pour s'assurer de la conformité du chiffre donné
     while (isNaN(userNb) || userNb > 6 || userNb < 1){
         console.log("pas un chiffre entre 1 et 6 !")
         userNb = prompt("J'ai vraiment besoin d'un chiffre entre 1 et 6 ! Merci, bisous.")
     }
 
-    // console.log(userNb)
+    // mise à jour du nombre d'allumettes restantes
     nbAllumettes -= Number(userNb)
-    // console.log(nbAllumettes)
 
+    // boucle pour vérifier que le chiffre donné n'induit pas une erreur (retirer plus d'allumettes qu'il n'en reste)
     while(nbAllumettes < 0){
         console.log(`${nbAllumettes} Solde négatif !`)
         nbAllumettes += Number(userNb)
@@ -49,23 +34,34 @@ function promptUser(joueur){
     return nbAllumettes
 }
 
-/* lancement boucleJeu
-tant que nb allumettes n'est pas de 0, ça joue
-d'abord, le prompt pour le joueur 1
-une fois que joueur 1 a bien répondu,
-prompt pour joueur 2
+// fonction principale qui fait tourner tout le jeu
+function boucleJeu (){
 
-(prompt bien répondu = function prompt(joueur1), avec la boucle while isNaN etc dedans)
+    console.log("je suis dans boucleJeu")
 
-une fois que nbAllumettes < 0,
-dire QUI a gagné (c'est à dire, le joueur qui fait tomber le nbAllum a 0)
+    // boucle de tour de jeu par joueur, ce qu'il se passe tant que le solde d'allumettes restantes est positif
+    while(nbAllumettes > 0){
 
-faire un tableau des joueurs joueurs[i]
-avec une boucle for 
-condition entrée : nbAllu > 0
-condition de sortie : nbAllu < 0
-itération: passe au joueur suivant i++ 
+        nbAllumettes = promptUser(joueurs[i]) // tour de jeu par joueur
+        console.log(nbAllumettes + joueurs[i])
 
-*/
+        // condtions pour 
+        if (nbAllumettes > 0){ 
+            i++
+
+            // réinitialisation du tour des joueurs lorsque tout le monde a joué
+            if (i === joueurs.length) {
+            i = 0
+            }
+        }      
+        
+    }
+
+    // la victoire !
+    alert(`Bravo ${joueurs[i]} ! Il ne reste plus d'allumettes, la partie est terminée.`)
+    
+}
+
+boucleJeu()
 
 
